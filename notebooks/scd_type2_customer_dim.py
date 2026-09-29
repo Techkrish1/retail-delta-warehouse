@@ -508,36 +508,25 @@ print(f"[CHECK] Active rows end date OK : {open_end_mismatch}  {'✓ PASS' if op
 
 # MAGIC %md
 # MAGIC ---
-# MAGIC ## Summary & Key Takeaways
+# MAGIC ## Wrapping Up
 # MAGIC
-# MAGIC ### What we built
-# MAGIC A production-grade SCD Type 2 pipeline on Delta Lake that:
-# MAGIC - Preserves the full history of every customer dimension change
-# MAGIC - Supports point-in-time queries for historical reporting
-# MAGIC - Is idempotent — running it twice on the same staging data produces no double-expiry
-# MAGIC - Includes built-in data quality assertions
-# MAGIC - Leverages Delta Lake time travel for a zero-cost audit trail
+# MAGIC Getting SCD2 right the first time is harder than it looks. The logic seems straightforward — expire the old row, insert the new one — but the moment you try to do both in a single MERGE statement, you hit a wall. That two-pass approach isn't a workaround, it's the correct way to think about it: first close what changed, then open fresh versions.
 # MAGIC
-# MAGIC ---
+# MAGIC A few things I'd call out as genuinely easy to get wrong:
 # MAGIC
-# MAGIC ### Design decisions worth remembering
+# MAGIC **The surrogate key.** Using `customer_id` as the primary key breaks as soon as you have two rows for the same customer. This is the kind of bug that doesn't blow up immediately — it shows up weeks later when your joins start returning duplicates in reports.
 # MAGIC
-# MAGIC | Decision | Reason |
-# MAGIC |----------|--------|
-# MAGIC | Surrogate key as primary key | Natural key repeats across versions — surrogate key uniquely identifies each row |
-# MAGIC | `9999-12-31` sentinel over NULL | Simplifies range queries; NULL requires IS NULL checks everywhere |
-# MAGIC | `is_current` denormalized flag | Performance — filtered scans on a boolean are faster than date comparisons |
-# MAGIC | Two-pass MERGE | Single MERGE cannot UPDATE + INSERT for the same matched key in one pass |
-# MAGIC | `eff_end_date = current_date - 1` | Avoids overlap between old version's close date and new version's open date |
-# MAGIC | `autoOptimize` table properties | Prevents small files accumulation from frequent small MERGEs |
+# MAGIC **NULL vs. `9999-12-31`.** Using NULL for open-ended records feels cleaner at first, but you end up writing `WHERE eff_end_date IS NULL OR eff_end_date >= :query_date` everywhere. The sentinel date keeps queries readable and consistent.
+# MAGIC
+# MAGIC **`is_current` feels redundant but isn't.** You already have `eff_end_date = '9999-12-31'` to identify active rows, so why add `is_current`? Because most BI tools and analysts filtering for "current customers" shouldn't need to know what the sentinel date convention is. It's a usability decision as much as a performance one.
+# MAGIC
+# MAGIC **The end date is `current_date - 1`, not `current_date`.** Subtle, but important. If the old version ends today and the new version also starts today, you have a one-day overlap. That breaks point-in-time queries for today's date. Closing yesterday keeps the ranges clean.
 # MAGIC
 # MAGIC ---
 # MAGIC
-# MAGIC ### Interview questions this notebook prepares you for
+# MAGIC ### Things to think about before taking this to production
 # MAGIC
-# MAGIC - *"Walk me through your SCD2 implementation."*
-# MAGIC - *"Why can't you do SCD2 in a single MERGE?"*
-# MAGIC - *"How would you handle a customer who changes address twice in the same day?"*
-# MAGIC - *"How do you handle new columns added to the source?"* → Delta schema evolution + autoMerge
-# MAGIC - *"How do you ensure idempotency?"* → Staging dedup + is_current guard in MERGE condition
-# MAGIC - *"How would you scale this to 100M customers?"* → Partition by `country` or hash of `customer_id`, Z-order on `customer_id`
+# MAGIC - What happens if the same customer appears twice in the same staging batch? You need deduplication upstream or the MERGE will behave unpredictably.
+# MAGIC - How do you handle late-arriving data — a change that should have been effective 3 days ago? The effective dates need to come from the source, not `current_date()`.
+# MAGIC - At scale (100M+ customers), partition this table by `country` or a hash bucket of `customer_id`. Add a Z-order on `customer_id` so MERGE scans stay fast.
+# MAGIC - Delta's `DESCRIBE HISTORY` gives you a full audit trail out of the box. Before building a separate change log table, check if time travel already covers your compliance requirement.
