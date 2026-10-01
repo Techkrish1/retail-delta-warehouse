@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="730" viewBox="0 0 1100 730">
+
+  <!-- Arrowhead marker -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="730" fill="#F8FAFC"/>
+
+  <!-- ─── Title ─── -->
+  <text x="550" y="36" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#1E293B">
+    retail-delta-warehouse — Data Model
+  </text>
+  <text x="550" y="54" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#64748B">
+    SCD Type 2 · Customer Dimension · Delta Lake
+  </text>
+
+  <!-- ══════════════════════════════════════ -->
+  <!--  staging_updates  (x=40, y=80)        -->
+  <!-- ══════════════════════════════════════ -->
+
+  <!-- Table border -->
+  <rect x="40" y="80" width="300" height="234" fill="white" stroke="#94A3B8" stroke-width="1.5" rx="4"/>
+  <!-- Header fill (rounded top only via two rects) -->
+  <rect x="40" y="80" width="300" height="42" fill="#334155" rx="4"/>
+  <rect x="40" y="106" width="300" height="16" fill="#334155"/>
+  <!-- Header text -->
+  <text x="190" y="99" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="white">staging_updates</text>
+  <text x="190" y="114" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#94A3B8">source / staging view</text>
+
+  <!-- Row 1: customer_id (NK) -->
+  <rect x="40" y="122" width="300" height="32" fill="#EEF2FF" stroke="#E2E8F0" stroke-width="0.5"/>
+  <rect x="52" y="131" width="22" height="14" fill="#3B82F6" rx="2"/>
+  <text x="63" y="142" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="white">NK</text>
+  <text x="83" y="143" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">customer_id</text>
+  <text x="332" y="143" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">INT</text>
+
+  <!-- Row 2: customer_name -->
+  <rect x="40" y="154" width="300" height="32" fill="white" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="56" y="175" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">customer_name</text>
+  <text x="332" y="175" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">STRING</text>
+
+  <!-- Row 3: email -->
+  <rect x="40" y="186" width="300" height="32" fill="white" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="56" y="207" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">email</text>
+  <text x="332" y="207" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">STRING</text>
+
+  <!-- Row 4: address -->
+  <rect x="40" y="218" width="300" height="32" fill="white" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="56" y="239" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">address</text>
+  <text x="332" y="239" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">STRING</text>
+
+  <!-- Row 5: city -->
+  <rect x="40" y="250" width="300" height="32" fill="white" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="56" y="271" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">city</text>
+  <text x="332" y="271" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">STRING</text>
+
+  <!-- Row 6: country -->
+  <rect x="40" y="282" width="300" height="32" fill="white" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="56" y="303" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">country</text>
+  <text x="332" y="303" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">STRING</text>
+
+  <!-- ─── MERGE Arrow ─── -->
+  <path d="M 340,197 C 390,197 390,273 440,273"
+        fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="6,3"
+        marker-end="url(#arrow)"/>
+  <rect x="355" y="215" width="92" height="22" fill="#F1F5F9" rx="3" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="401" y="230" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="bold" fill="#334155">MERGE INTO</text>
+
+  <!-- ══════════════════════════════════════ -->
+  <!--  retail.customer_dim  (x=440, y=60)   -->
+  <!-- ══════════════════════════════════════ -->
+
+  <!-- Table border -->
+  <rect x="440" y="60" width="400" height="426" fill="white" stroke="#1E3A5F" stroke-width="1.5" rx="4"/>
+  <!-- Header fill -->
+  <rect x="440" y="60" width="400" height="42" fill="#1E3A5F" rx="4"/>
+  <rect x="440" y="86" width="400" height="16" fill="#1E3A5F"/>
+  <!-- DELTA badge -->
+  <rect x="766" y="68" width="48" height="17" fill="#E11D48" rx="3"/>
+  <text x="790" y="80" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="white">DELTA</text>
+  <!-- Header text -->
+  <text x="610" y="82" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="white">retail.customer_dim</text>
+  <text x="610" y="97" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#93C5FD">SCD Type 2 dimension table</text>
+
+  <!-- Row 1: surrogate_key (PK) -->
+  <rect x="440" y="102" width="400" height="32" fill="#FEFCE8" stroke="#E2E8F0" stroke-width="0.5"/>
+  <rect x="452" y="111" width="22" height="14" fill="#D97706" rx="2"/>
+  <text x="463" y="122" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="white">PK</text>
+  <text x="483" y="123" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">surrogate_key</text>
+  <text x="832" y="123" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">BIGINT</text>
+
+  <!-- Row 2: customer_id (NK) -->
+  <rect x="440" y="134" width="400" height="32" fill="#EEF2FF" stroke="#E2E8F0" stroke-width="0.5"/>
+  <rect x="452" y="143" width="22" height="14" fill="#3B82F6" rx="2"/>
+  <text x="463" y="154" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="white">NK</text>
+  <text x="483" y="155" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">customer_id</text>
+  <text x="832" y="155" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">INT</text>
+
+  <!-- Row 3: customer_name -->
+  <rect x="440" y="166" width="400" height="32" fill="white" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="456" y="187" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">customer_name</text>
+  <text x="832" y="187" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">STRING</text>
+
+  <!-- Row 4: email -->
+  <rect x="440" y="198" width="400" height="32" fill="white" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="456" y="219" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">email</text>
+  <text x="832" y="219" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">STRING</text>
+
+  <!-- Row 5: address -->
+  <rect x="440" y="230" width="400" height="32" fill="white" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="456" y="251" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">address</text>
+  <text x="832" y="251" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">STRING</text>
+
+  <!-- Row 6: city -->
+  <rect x="440" y="262" width="400" height="32" fill="white" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="456" y="283" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">city</text>
+  <text x="832" y="283" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">STRING</text>
+
+  <!-- Row 7: country -->
+  <rect x="440" y="294" width="400" height="32" fill="white" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="456" y="315" font-family="'Courier New', monospace" font-size="12" fill="#1E293B">country</text>
+  <text x="832" y="315" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">STRING</text>
+
+  <!-- SCD2 section divider -->
+  <line x1="441" y1="326" x2="839" y2="326" stroke="#22C55E" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <rect x="715" y="319" width="120" height="14" fill="#DCFCE7" rx="2" stroke="#22C55E" stroke-width="0.5"/>
+  <text x="775" y="330" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#15803D">SCD2 versioning cols</text>
+
+  <!-- Row 8: eff_start_date -->
+  <rect x="440" y="326" width="400" height="32" fill="#F0FDF4" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="456" y="347" font-family="'Courier New', monospace" font-size="12" fill="#166534">eff_start_date</text>
+  <text x="832" y="347" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">DATE</text>
+
+  <!-- Row 9: eff_end_date -->
+  <rect x="440" y="358" width="400" height="32" fill="#F0FDF4" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="456" y="379" font-family="'Courier New', monospace" font-size="12" fill="#166534">eff_end_date</text>
+  <text x="832" y="379" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">DATE</text>
+
+  <!-- Row 10: is_current -->
+  <rect x="440" y="390" width="400" height="32" fill="#F0FDF4" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="456" y="411" font-family="'Courier New', monospace" font-size="12" fill="#166534">is_current</text>
+  <text x="832" y="411" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#64748B">BOOLEAN</text>
+
+  <!-- Audit section divider -->
+  <line x1="441" y1="422" x2="839" y2="422" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4,3"/>
+  <rect x="738" y="415" width="96" height="14" fill="#F1F5F9" rx="2" stroke="#CBD5E1" stroke-width="0.5"/>
+  <text x="786" y="426" text-anchor="middle" font-family="Arial" font-size="9" fill="#94A3B8">audit cols</text>
+
+  <!-- Row 11: created_at -->
+  <rect x="440" y="422" width="400" height="32" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="456" y="443" font-family="'Courier New', monospace" font-size="12" fill="#94A3B8">created_at</text>
+  <text x="832" y="443" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#94A3B8">TIMESTAMP</text>
+
+  <!-- Row 12: updated_at -->
+  <rect x="440" y="454" width="400" height="32" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="0.5"/>
+  <text x="456" y="475" font-family="'Courier New', monospace" font-size="12" fill="#94A3B8">updated_at</text>
+  <text x="832" y="475" text-anchor="end" font-family="'Courier New', monospace" font-size="11" fill="#94A3B8">TIMESTAMP</text>
+
+  <!-- ══════════════════════════════════════ -->
+  <!--  Legend  (x=870, y=80)               -->
+  <!-- ══════════════════════════════════════ -->
+
+  <rect x="866" y="78" width="210" height="142" fill="white" stroke="#E2E8F0" stroke-width="1.5" rx="4"/>
+  <rect x="866" y="78" width="210" height="30" fill="#F1F5F9" rx="4"/>
+  <rect x="866" y="94" width="210" height="14" fill="#F1F5F9"/>
+  <text x="971" y="98" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#334155">Legend</text>
+
+  <!-- PK -->
+  <rect x="882" y="118" width="22" height="14" fill="#D97706" rx="2"/>
+  <text x="893" y="129" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="white">PK</text>
+  <text x="912" y="130" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#334155">Primary Key (surrogate)</text>
+
+  <!-- NK -->
+  <rect x="882" y="140" width="22" height="14" fill="#3B82F6" rx="2"/>
+  <text x="893" y="151" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="white">NK</text>
+  <text x="912" y="152" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#334155">Natural / Business Key</text>
+
+  <!-- SCD2 cols -->
+  <rect x="882" y="162" width="22" height="14" fill="#22C55E" rx="2"/>
+  <text x="893" y="173" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="white">S2</text>
+  <text x="912" y="174" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#334155">SCD2 versioning columns</text>
+
+  <!-- DELTA -->
+  <rect x="882" y="184" width="48" height="14" fill="#E11D48" rx="2"/>
+  <text x="906" y="195" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="white">DELTA</text>
+  <text x="938" y="196" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#334155">Delta Lake format</text>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  SCD2 Concept — same customer_id, two rows               -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+
+  <!-- Section title -->
+  <text x="40" y="518" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#334155">
+    How SCD2 works — customer_id 101, address change:
+  </text>
+
+  <!-- Column headers -->
+  <rect x="40"  y="527" width="100" height="26" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="0.5" rx="2"/>
+  <rect x="140" y="527" width="120" height="26" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="0.5"/>
+  <rect x="260" y="527" width="160" height="26" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="0.5"/>
+  <rect x="420" y="527" width="130" height="26" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="0.5"/>
+  <rect x="550" y="527" width="130" height="26" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="0.5"/>
+  <rect x="680" y="527" width="90"  height="26" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="0.5" rx="2"/>
+
+  <text x="90"  y="545" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#475569">surrogate_key</text>
+  <text x="200" y="545" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#475569">customer_id</text>
+  <text x="340" y="545" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#475569">address</text>
+  <text x="485" y="545" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#475569">eff_start_date</text>
+  <text x="615" y="545" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#475569">eff_end_date</text>
+  <text x="725" y="545" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#475569">is_current</text>
+
+  <!-- Expired row (red) -->
+  <rect x="40"  y="553" width="100" height="28" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="0.5"/>
+  <rect x="140" y="553" width="120" height="28" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="0.5"/>
+  <rect x="260" y="553" width="160" height="28" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="0.5"/>
+  <rect x="420" y="553" width="130" height="28" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="0.5"/>
+  <rect x="550" y="553" width="130" height="28" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="0.5"/>
+  <rect x="680" y="553" width="90"  height="28" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="0.5"/>
+
+  <text x="90"  y="572" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#991B1B">1</text>
+  <text x="200" y="572" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#991B1B">101</text>
+  <text x="340" y="572" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#991B1B">123 Main St</text>
+  <text x="485" y="572" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#991B1B">2023-01-01</text>
+  <text x="615" y="572" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#991B1B">2025-09-29</text>
+  <text x="725" y="572" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#991B1B">false</text>
+  <!-- EXPIRED badge -->
+  <rect x="780" y="558" width="58" height="16" fill="#FEE2E2" rx="3" stroke="#EF4444" stroke-width="0.5"/>
+  <text x="809"  y="570" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#DC2626">EXPIRED</text>
+
+  <!-- Active row (green) -->
+  <rect x="40"  y="581" width="100" height="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="0.5"/>
+  <rect x="140" y="581" width="120" height="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="0.5"/>
+  <rect x="260" y="581" width="160" height="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="0.5"/>
+  <rect x="420" y="581" width="130" height="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="0.5"/>
+  <rect x="550" y="581" width="130" height="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="0.5"/>
+  <rect x="680" y="581" width="90"  height="28" fill="#F0FDF4" stroke="#86EFAC" stroke-width="0.5"/>
+
+  <text x="90"  y="600" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#14532D">6</text>
+  <text x="200" y="600" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#14532D">101</text>
+  <text x="340" y="600" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#14532D">88 Rainier Ave</text>
+  <text x="485" y="600" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#14532D">2025-09-30</text>
+  <text x="615" y="600" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#14532D">9999-12-31</text>
+  <text x="725" y="600" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#14532D">true</text>
+  <!-- ACTIVE badge -->
+  <rect x="780" y="586" width="58" height="16" fill="#DCFCE7" rx="3" stroke="#22C55E" stroke-width="0.5"/>
+  <text x="809"  y="598" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#15803D">ACTIVE</text>
+
+  <!-- Explanation text -->
+  <text x="40" y="630" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#475569">
+    Same customer_id (101), two different surrogate keys — the old address is preserved in the expired row, not overwritten.
+  </text>
+  <text x="40" y="648" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#475569">
+    Point-in-time query:  WHERE eff_start_date &lt;= :as_of_date  AND  eff_end_date &gt;= :as_of_date  →  returns exactly one row.
+  </text>
+
+</svg>

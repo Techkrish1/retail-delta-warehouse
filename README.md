@@ -4,6 +4,14 @@ A hands-on data engineering project built on **Databricks + Delta Lake**, using 
 
 ---
 
+## Data Model
+
+![Data Model](docs/data-model.svg)
+
+> **Edit this diagram:** Open [`docs/data-model.drawio`](docs/data-model.drawio) in VS Code with the Draw.io extension.
+
+---
+
 ## Problem
 
 Customer data changes. People move, update email addresses, switch regions. A simple `UPDATE` destroys that history, and the business loses the ability to answer questions like:
